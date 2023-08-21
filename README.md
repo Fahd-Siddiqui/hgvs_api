@@ -1,30 +1,30 @@
 # BIOCOMMONS HGVS API
 
 ## Docker Quick Start
+
 ```shell
 make docker
 ```
 
 Run
+
 ```
 docker compose up
 ```
 
-Wait for the data to download. After which, 
-open the browser and point to [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
-
-
+Wait for the data to download. After which, open the browser and point
+to [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 
 ### Database Backend
+
 Edit the [docker-compose.yaml](docker-compose.yml) file and comment out the following:
 
 `UTA_DB_URL=postgresql://anonymous@uta_db:5432/uta/uta_20210129`
 
 to use biocommons web database instead of the included docker database.
 
-
-
 ## Non-Docker
+
 Note non-Docker relies on Biocommons database backend and might be slow to annotate
 
 To prepare venv and install requirements
@@ -32,7 +32,6 @@ To prepare venv and install requirements
 ```shell
 make install
 ``` 
-
 
 Start the application
 
@@ -42,15 +41,15 @@ python -m uvicorn src.hgvs_api:app --reload --port 8001
 
 Open the browser and point to [http://127.0.0.1:8001/docs](http://127.0.0.1:8001/docs)
 
-
-
 ## Example:
 
 ### GET Request
+
 [http://127.0.0.1:8000/vcf/?assembly=GRCh38&chromosome=9&position=5066679&ref_allele=ATGGATTTTGCCATTAGTAAACTGAAGA&alt_allele=A](http://127.0.0.1:8000/vcf/?assembly=GRCh38&chromosome=9&position=5066679&ref_allele=ATGGATTTTGCCATTAGTAAACTGAAGA&alt_allele=A
 )
 
-###Results:
+### Results:
+
 ```json
 {
   "timestamp": 1692410793,
@@ -149,9 +148,10 @@ Open the browser and point to [http://127.0.0.1:8001/docs](http://127.0.0.1:8001
 }
 ```
 
-
 ## Development
+
 Developed using
+
 1. Python 3.10
 2. Fast Api
 3. Pydantic
@@ -159,11 +159,13 @@ Developed using
 Ensure linting and tests pass:
 
 ### local environment
+
 ```shell
 make install
 ``` 
 
 ### Test
+
 ```shell
 make requirements-test
 make lint
@@ -171,5 +173,7 @@ make test
 ```
 
 ## Attributions
+
 Thanks to Biocommons :)
+
 [https://github.com/biocommons/hgvs](https://github.com/biocommons/hgvs)
