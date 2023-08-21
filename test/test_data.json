@@ -1,0 +1,47 @@
+{
+  "chromosome": "9",
+  "accession": "NC_000009.12",
+  "position": 5066679,
+  "position_end": 5066706,
+  "ref_allele": "ATGGATTTTGCCATTAGTAAACTGAAGA",
+  "alt_allele": "A",
+  "hgvs_g": "NC_000009.12:g.5066679_5066706delinsA",
+  "variant_type": "delins",
+  "transcripts": [
+    {
+      "transcript": "NM_001322198.1",
+      "hgvs_c": "NM_001322198.1:c.2_28del",
+      "hgvs_p": "NP_001309127.1:p.Met1?"
+    },
+    {
+      "transcript": "NM_001322196.1",
+      "hgvs_c": "NM_001322196.1:c.1217_1243del",
+      "hgvs_p": "NP_001309125.1:p.(Met406_Lys414del)"
+    },
+    {
+      "transcript": "NM_001322199.1",
+      "hgvs_c": "NM_001322199.1:c.2_28del",
+      "hgvs_p": "NP_001309128.1:p.Met1?"
+    },
+    {
+      "transcript": "NM_004972.3",
+      "hgvs_c": "NM_004972.3:c.1217_1243del",
+      "hgvs_p": "NP_004963.1:p.(Met406_Lys414del)"
+    },
+    {
+      "transcript": "NM_001322195.1",
+      "hgvs_c": "NM_001322195.1:c.1217_1243del",
+      "hgvs_p": "NP_001309124.1:p.(Met406_Lys414del)"
+    },
+    {
+      "transcript": "NM_001322194.1",
+      "hgvs_c": "NM_001322194.1:c.1217_1243del",
+      "hgvs_p": "NP_001309123.1:p.(Met406_Lys414del)"
+    },
+    {
+      "transcript": "NM_001322204.1",
+      "hgvs_c": "NM_001322204.1:c.770_796del",
+      "hgvs_p": "NP_001309133.1:p.(Met257_Lys265del)"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+version: "3"
+name: hgvs
+volumes:
+  seqrepo_data:
+  uta_db_data:
+
+services:
+  seqrepo_rsync:
+    # syncs the sequence data from the web
+    # takes long for the first run
+    build: ./seqrepo
+    container_name: seqrepo_rsync
+    command: [ '/usr/bin/rsync', '-azvHP', '--no-motd', 'dl.biocommons.org::seqrepo/2021-01-29/', '/seqrepo/latest' ]
+    volumes:
+      - seqrepo_data:/seqrepo
+
+  uta_db:
+    # postgres database for serving the UTA database
+    # takes long for the first run
+    build: uta/.
+    container_name: uta_db
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - uta_db_data:/var/lib/postgresql/data
+
+  api:
+    # Actual Api
+    build: .
+    container_name: api
+    restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      - seqrepo_data:/seqrepo
+    environment:
+      - UTA_DB_URL=postgresql://anonymous@uta_db:5432/uta/uta_20210129 # Comment to use biocommons web database
+      - HGVS_SEQREPO_DIR=/seqrepo/latest
+      - GRANT_SUDO=yes
+      - WEB_CONCURRENCY=4  # workers for api
+
+    depends_on:
+      - seqrepo_rsync
+      - uta_db
+
