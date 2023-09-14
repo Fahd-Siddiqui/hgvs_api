@@ -41,6 +41,7 @@ services:
       - WEB_CONCURRENCY=4  # workers for api
 
     depends_on:
-      - seqrepo_rsync
-      - uta_db
-
+      seqrepo_rsync:
+        condition: service_completed_successfully
+      uta_db:
+        condition: service_started
