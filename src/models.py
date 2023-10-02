@@ -13,11 +13,11 @@ class AnnotatedTranscript(pydantic.BaseModel):
 
 class Variant(pydantic.BaseModel):
     chromosome: Optional[str]
-    accession: str
+    accession: Optional[str]
     position: int
     position_end: int
-    ref_allele: str
-    alt_allele: str
+    ref_allele: Optional[str]
+    alt_allele: Optional[str]
 
     variant_type: str
     hgvs_g: str
