@@ -58,6 +58,14 @@ class AssemblyMapperFixture:
         }
         return hdp
 
+    @property
+    def _norm(self):
+        class Normalizer:
+            def normalize(self, variant):
+                return variant
+
+        return Normalizer()
+
 
 class HgvsParserFixture:
     def __init__(self):

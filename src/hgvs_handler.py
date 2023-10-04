@@ -1,7 +1,7 @@
 import functools
 import logging
 from enum import Enum
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 import hgvs.assemblymapper
 import hgvs.dataproviders.uta
@@ -17,7 +17,7 @@ class Assembly(Enum):
     GRCh37 = "GRCh37"
 
     @classmethod
-    def _missing_(cls, name):
+    def _missing_(cls, name: str) -> Optional["Assembly"]:  # type: ignore[override]
         found = next(
             (member for member in cls if member.name.lower() == name.lower()),
             None,
@@ -30,7 +30,7 @@ class HgvsHandler:
     logger = logging.getLogger(__name__)
 
     @functools.cached_property
-    def hgvs_parser(self):
+    def hgvs_parser(self) -> hgvs.parser.Parser:
         return hgvs.parser.Parser()
 
     @functools.cached_property
@@ -56,6 +56,7 @@ class HgvsHandler:
     def get_annotation_from_hgvs_g(self, hgvs_g: str, assembly: Assembly) -> Variant:
         variant_hgvs_g: SequenceVariant = self.hgvs_parser.parse(hgvs_g)
         assembly_mapper = self.assembly_mapper[assembly]
+        variant_hgvs_g = assembly_mapper._norm.normalize(variant_hgvs_g)
         transcripts = assembly_mapper.relevant_transcripts(variant_hgvs_g)
 
         accession = variant_hgvs_g.ac
@@ -64,13 +65,17 @@ class HgvsHandler:
         simple_position = variant_hgvs_g.posedit
         annotated_transcripts = self._get_annotated_transcripts(transcripts, assembly_mapper, variant_hgvs_g)
 
+        alt_allele = None
+        if hasattr(simple_position.edit, "alt"):
+            alt_allele = simple_position.edit.alt
+
         variant = Variant(
             chromosome=chromosome,
             accession=accession,
             position=simple_position.pos.start.base,
             position_end=simple_position.pos.end.base,
             ref_allele=simple_position.edit.ref,
-            alt_allele=simple_position.edit.alt,
+            alt_allele=alt_allele,
             hgvs_g=str(variant_hgvs_g),
             variant_type=simple_position.edit.type,
             transcripts=annotated_transcripts,
@@ -79,7 +84,9 @@ class HgvsHandler:
         return variant
 
     @staticmethod
-    def _get_annotated_transcripts(transcripts: List[str], assembly_mapper, variant_hgvs_g) -> List:
+    def _get_annotated_transcripts(
+        transcripts: List[str], assembly_mapper: hgvs.assemblymapper.AssemblyMapper, variant_hgvs_g: SequenceVariant
+    ) -> List:
         annotated_transcripts = []
 
         for transcript in transcripts:
@@ -98,4 +105,5 @@ class HgvsHandler:
             except HGVSUsageError as e:
                 logging.getLogger(__name__).error(f"Exception: {e}")
                 annotated_transcripts.append(AnnotatedTranscript(transcript=transcript, error=str(e)))
+
         return annotated_transcripts

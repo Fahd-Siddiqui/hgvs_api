@@ -1,4 +1,5 @@
 [tool.mypy]
+disallow_untyped_defs = true
 [[tool.mypy.overrides]]
 module = [
     "hgvs.*"
@@ -9,3 +10,16 @@ ignore_missing_imports = true
 line-length = 120
 target-version = ['py38']
 skip-string-normalization = true
+
+[tool.isort]
+line_length = 120
+multi_line_output = 5
+profile = "black"
+
+
+[tool.coverage.run]
+source = ["src"]
+
+[tool.coverage.report]
+precision = 1
+fail_under = 95

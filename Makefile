@@ -16,8 +16,8 @@ lint:
 # Tests: pytest from src folder with coverage and printing coverage report
 test:
 	@echo "Running tests with coverage..."
-	@coverage run --source=src -m pytest test
-	@coverage report --fail-under=80
+	@coverage run -m pytest test
+	@coverage report
 
 # Requirements: installs test requirements
 requirements-test:

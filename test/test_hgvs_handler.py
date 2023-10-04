@@ -1,6 +1,5 @@
 import unittest
-from test.fixtures import (AssemblyMapperFixture, HgvsParserFixture,
-                           load_test_data)
+from test.fixtures import AssemblyMapperFixture, HgvsParserFixture, load_test_data
 from unittest.mock import patch
 
 from src.hgvs_handler import Assembly, HgvsHandler
@@ -22,6 +21,6 @@ class TestHgvs(unittest.TestCase):
             alt_allele=test_data["alt_allele"]
         )
         hgvs_handler = HgvsHandler()
-        result = hgvs_handler.get_annotation_from_hgvs_g(hgvs_g, Assembly("GRCh38"))
+        result = hgvs_handler.get_annotation_from_hgvs_g(hgvs_g, Assembly("GRCH38"))
 
         self.assertDictEqual(result.model_dump(exclude_none=True, exclude_unset=True), test_data)

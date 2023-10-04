@@ -27,14 +27,14 @@ class Utils:
 
 class ChromosomeUtils:
     @classmethod
-    def get_accession(cls, chromosome: str, assembly_map: Dict[str, str]):
-        accession_map = cls._get_accession_map(assembly_map)
+    def get_accession(cls, chromosome: str, assembly_map: Dict[str, str]) -> str:
+        accession_map: Dict[str, str] = cls._get_accession_map(assembly_map)
         fixed_chromosome = cls.__fix_chr(chromosome)
         fixed_chromosome = cls.__remove_version(fixed_chromosome)
         return accession_map[fixed_chromosome]
 
     @staticmethod
-    def __remove_version(accession: str):
+    def __remove_version(accession: str) -> str:
         return accession.split(".")[0]
 
     @staticmethod

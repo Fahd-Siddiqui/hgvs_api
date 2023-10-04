@@ -1,5 +1,4 @@
-from test.fixtures import (AssemblyMapperFixture, HgvsParserFixture,
-                           load_test_data)
+from test.fixtures import AssemblyMapperFixture, HgvsParserFixture, load_test_data
 from unittest.mock import patch
 
 from fastapi.testclient import TestClient

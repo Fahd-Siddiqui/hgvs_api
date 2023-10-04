@@ -31,7 +31,7 @@ def response_template(result: pydantic.BaseModel) -> Dict[str, Any]:
 
 
 @app.get("/")
-async def root():
+async def root() -> Dict[str, Any]:
     message = MessageResponse(message="Connection successful. " "Navigate to /docs to find out how to use this API.")
     return response_template(message)
 
@@ -43,7 +43,7 @@ async def get_vcf_annotation(
     position: int,
     ref_allele: str,
     alt_allele: str,
-):
+) -> Dict[str, Any]:
     assembly_map = hgvs_handler.assembly_mapper[assembly].hdp.get_assembly_map(assembly.value)
     accession = ChromosomeUtils.get_accession(chromosome, assembly_map)
 
@@ -59,6 +59,6 @@ async def get_vcf_annotation(
 
 
 @app.get("/hgvsg/")
-async def get_hgvs_annotation(assembly: Assembly, hgvs_g: str):
+async def get_hgvs_annotation(assembly: Assembly, hgvs_g: str) -> Dict[str, Any]:
     result = hgvs_handler.get_annotation_from_hgvs_g(hgvs_g, assembly)
     return response_template(result)
