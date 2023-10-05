@@ -53,10 +53,14 @@ class HgvsHandler:
     def data_version(self) -> str:
         return self.assembly_mapper[Assembly.GRCh38].hdp.data_version()
 
+    @staticmethod
+    def normalize(assembly_mapper, variant):
+        return assembly_mapper._norm.normalize(variant)
+
     def get_annotation_from_hgvs_g(self, hgvs_g: str, assembly: Assembly) -> Variant:
         variant_hgvs_g: SequenceVariant = self.hgvs_parser.parse(hgvs_g)
         assembly_mapper = self.assembly_mapper[assembly]
-        variant_hgvs_g = assembly_mapper._norm.normalize(variant_hgvs_g)
+        variant_hgvs_g = self.normalize(assembly_mapper, variant_hgvs_g)
         transcripts = assembly_mapper.relevant_transcripts(variant_hgvs_g)
 
         accession = variant_hgvs_g.ac

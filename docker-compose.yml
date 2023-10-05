@@ -38,7 +38,7 @@ services:
       - UTA_DB_URL=postgresql://anonymous@uta_db:5432/uta/uta_20210129 # Comment to use biocommons web database
       - HGVS_SEQREPO_DIR=/seqrepo/latest
       - GRANT_SUDO=yes
-      - WEB_CONCURRENCY=32  # workers for api
+      - WEB_CONCURRENCY=16  # workers for api
 
     depends_on:
       seqrepo_rsync:
