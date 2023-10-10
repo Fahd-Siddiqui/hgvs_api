@@ -9,7 +9,6 @@ from src.utils import Utils
 @patch.object(HgvsHandler, "assembly_mapper", {Assembly.GRCh38: AssemblyMapperFixture()})
 @patch.object(HgvsHandler, "hgvs_parser", HgvsParserFixture())
 class TestHgvs(unittest.TestCase):
-
     def test_get_annotation_from(self):
         self.maxDiff = None
         test_data = load_test_data()
@@ -19,7 +18,7 @@ class TestHgvs(unittest.TestCase):
             accession=test_data["accession"],
             position=test_data["position"],
             ref_allele=test_data["ref_allele"],
-            alt_allele=test_data["alt_allele"]
+            alt_allele=test_data["alt_allele"],
         )
         hgvs_handler = HgvsHandler()
         result = hgvs_handler.get_annotation_from_hgvs_g(hgvs_g, Assembly("GRCH38"))

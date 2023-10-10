@@ -16,13 +16,11 @@ class TestApi:
         response = client.get("/")
         assert response.status_code == 200
         assert response.json()["result"] == {
-            "message": "Connection successful. "
-                       "Navigate to /docs to find out how to use this API."
+            "message": "Connection successful. " "Navigate to /docs to find out how to use this API."
         }
 
     def test_get_hgvsg_annotation(self):
-        query = "assembly=GRCh38&" \
-                "hgvs_g=NC_000009.11%3Ag.5066679_5066706delinsA"
+        query = "assembly=GRCh38&" "hgvs_g=NC_000009.11%3Ag.5066679_5066706delinsA"
         response = client.get(f"/hgvsg/?{query}")
         assertion_data = load_test_data()
 
@@ -32,11 +30,13 @@ class TestApi:
         assert response.json()["result"] == assertion_data
 
     def test_get_vcf_annotation(self):
-        query = "assembly=GRCh38&" \
-                "chromosome=9&" \
-                "position=5066679&" \
-                "ref_allele=ATGGATTTTGCCATTAGTAAACTGAAGA&" \
-                "alt_allele=A"
+        query = (
+            "assembly=GRCh38&"
+            "chromosome=9&"
+            "position=5066679&"
+            "ref_allele=ATGGATTTTGCCATTAGTAAACTGAAGA&"
+            "alt_allele=A"
+        )
         response = client.get(f"/vcf/?{query}")
         assert response.status_code == 200
         assert response.json()["result"] == load_test_data()

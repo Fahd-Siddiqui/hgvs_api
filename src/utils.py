@@ -25,12 +25,7 @@ class Utils:
         )
 
     @staticmethod
-    def get_vid(
-            chromosome: str,
-            position: int,
-            ref_allele: str,
-            alt_allele: str
-    ):
+    def get_vid(chromosome: str, position: int, ref_allele: str, alt_allele: str) -> str:
         return f"{chromosome}-{position}-{ref_allele}-{alt_allele}"
 
 

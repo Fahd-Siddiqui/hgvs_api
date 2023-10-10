@@ -10,7 +10,6 @@ def load_test_data():
 
 
 class AssemblyMapperFixture:
-
     def __init__(self):
         self.test_data = load_test_data()
         self.mocked_annotated_transcripts = self.test_data["transcripts"]
@@ -32,8 +31,7 @@ class AssemblyMapperFixture:
 
     def relevant_transcripts(self, *args, **kwargs):
         relevant_transcripts = [
-            annotated_transcript["transcript"]
-            for annotated_transcript in self.mocked_annotated_transcripts
+            annotated_transcript["transcript"] for annotated_transcript in self.mocked_annotated_transcripts
         ]
         return relevant_transcripts
 
@@ -53,9 +51,7 @@ class AssemblyMapperFixture:
     @property
     def hdp(self):
         hdp = MagicMock()
-        hdp.get_assembly_map = lambda *args: {
-            self.test_data["accession"]: self.test_data["chromosome"]
-        }
+        hdp.get_assembly_map = lambda *args: {self.test_data["accession"]: self.test_data["chromosome"]}
         return hdp
 
     @property
