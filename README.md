@@ -1,5 +1,11 @@
 # BIOCOMMONS HGVS API
 
+## Introduction
+Provides a REST API access to Biocommons HGVS annotation.
+See [Examples](#example)
+### Notes
+1. The variant position is right aligned before parsing HGVS
+
 ## Docker Quick Start
 
 ```shell
@@ -63,6 +69,7 @@ Open the browser and point to [http://127.0.0.1:8001/docs](http://127.0.0.1:8001
     "ref_allele": "ATGGATTTTGCCATTAGTAAACTGAAGA",
     "alt_allele": "A",
     "variant_type": "delins",
+    "vid": "9-5066679-ATGGATTTTGCCATTAGTAAACTGAAGA-A",
     "hgvs_g": "NC_000009.12:g.5066679_5066706delinsA",
     "transcripts": [
       {

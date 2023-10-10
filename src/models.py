@@ -19,6 +19,7 @@ class Variant(pydantic.BaseModel):
     ref_allele: Optional[str]
     alt_allele: Optional[str]
 
+    vid: Optional[str] = None
     variant_type: str
     hgvs_g: str
     transcripts: List[AnnotatedTranscript]

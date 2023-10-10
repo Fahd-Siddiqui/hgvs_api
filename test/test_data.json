@@ -5,6 +5,7 @@
   "position_end": 5066706,
   "ref_allele": "ATGGATTTTGCCATTAGTAAACTGAAGA",
   "alt_allele": "A",
+  "vid": "9-5066679-ATGGATTTTGCCATTAGTAAACTGAAGA-A",
   "hgvs_g": "NC_000009.12:g.5066679_5066706delinsA",
   "variant_type": "delins",
   "transcripts": [

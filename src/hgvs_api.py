@@ -6,6 +6,7 @@ import pydantic
 from fastapi import FastAPI
 
 from src.hgvs_handler import Assembly, HgvsHandler
+from src.models import Variant
 from src.utils import ChromosomeUtils, Utils
 
 app = FastAPI(title="HGVS API")
@@ -32,7 +33,7 @@ def response_template(result: pydantic.BaseModel) -> Dict[str, Any]:
 
 @app.get("/")
 async def root() -> Dict[str, Any]:
-    message = MessageResponse(message="Connection successful. " "Navigate to /docs to find out how to use this API.")
+    message = MessageResponse(message="Connection successful. Navigate to /docs to find out how to use this API.")
     return response_template(message)
 
 
@@ -54,8 +55,9 @@ async def get_vcf_annotation(
         alt_allele=alt_allele,
     )
 
-    result = hgvs_handler.get_annotation_from_hgvs_g(hgvs_g, assembly)
-    return response_template(result)
+    variant: Variant = hgvs_handler.get_annotation_from_hgvs_g(hgvs_g, assembly)
+    variant.vid = Utils.get_vid(chromosome, position, ref_allele, alt_allele)
+    return response_template(variant)
 
 
 @app.get("/hgvsg/")

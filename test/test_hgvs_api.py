@@ -24,12 +24,16 @@ class TestApi:
         query = "assembly=GRCh38&" \
                 "hgvs_g=NC_000009.11%3Ag.5066679_5066706delinsA"
         response = client.get(f"/hgvsg/?{query}")
+        assertion_data = load_test_data()
+
+        # hgvsg does not provide vid
+        assertion_data.pop("vid")
         assert response.status_code == 200
-        assert response.json()["result"] == load_test_data()
+        assert response.json()["result"] == assertion_data
 
     def test_get_vcf_annotation(self):
         query = "assembly=GRCh38&" \
-                "chromosome=NC_000009.11&" \
+                "chromosome=9&" \
                 "position=5066679&" \
                 "ref_allele=ATGGATTTTGCCATTAGTAAACTGAAGA&" \
                 "alt_allele=A"

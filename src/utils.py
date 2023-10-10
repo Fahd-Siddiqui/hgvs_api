@@ -24,6 +24,15 @@ class Utils:
             f"{alt_allele.upper()}"
         )
 
+    @staticmethod
+    def get_vid(
+            chromosome: str,
+            position: int,
+            ref_allele: str,
+            alt_allele: str
+    ):
+        return f"{chromosome}-{position}-{ref_allele}-{alt_allele}"
+
 
 class ChromosomeUtils:
     @classmethod

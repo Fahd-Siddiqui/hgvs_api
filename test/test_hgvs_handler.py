@@ -13,6 +13,7 @@ class TestHgvs(unittest.TestCase):
     def test_get_annotation_from(self):
         self.maxDiff = None
         test_data = load_test_data()
+        test_data.pop("vid")
 
         hgvs_g = Utils.vcf_to_hgvs_g(
             accession=test_data["accession"],
