@@ -30,10 +30,26 @@ requirements:
 	@pip install -r requirements.txt
 
 # Deploy: Builds docker image
-docker:
+docker-build:
 	@echo "Building docker image..."
 	@docker compose build
 	@echo "Run docker compose up -d"
+
+# Saves the docker images
+docker-save: docker-build
+	@echo "Saving images to output/"
+	@mkdir -p output
+	@docker save hgvs-api |gzip > output/hgvs-api-docker.tar.gz
+	@docker save hgvs-seqrepo_rsync |gzip > output/hgvs-seqrepo_rsync-docker.tar.gz
+	@docker save hgvs-uta_db |gzip > output/hgvs-uta_db-docker.tar.gz
+
+# Loads the docker images
+docker-load:
+	@echo "Loading images from output/"
+	@gunzip -c output/hgvs-api-docker.tar.gz | docker load
+	@gunzip -c output/hgvs-seqrepo_rsync-docker.tar.gz | docker load
+	@gunzip -c output/hgvs-uta_db-docker.tar.gz | docker load
+
 
 # Prepare venv
 prepare:
@@ -43,4 +59,4 @@ prepare:
 
 install: prepare requirements
 
-deploy: install requirements_test test docker
+deploy: install requirements_test test docker-build

@@ -9,7 +9,7 @@ See [Examples](#example)
 ## Docker Quick Start
 
 ```shell
-make docker
+make docker-build
 ```
 
 Run
