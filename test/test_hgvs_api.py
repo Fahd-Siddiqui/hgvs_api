@@ -20,7 +20,7 @@ class TestApi:
         }
 
     def test_get_hgvsg_annotation(self):
-        query = "assembly=GRCh38&" "hgvs_g=NC_000009.11%3Ag.5066679_5066706delinsA"
+        query = "assembly=GRCh38&hgvs_g=NC_000009.11%3Ag.5066679_5066706delinsA"
         response = client.get(f"/hgvsg/?{query}")
         assertion_data = load_test_data()
 
