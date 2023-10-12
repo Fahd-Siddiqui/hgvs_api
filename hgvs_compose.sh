@@ -31,9 +31,10 @@ start_containers() {
   check_volumes_exist
 
   # Start the seqrepo_rsync container
-  docker run -d --name $SEQREPO_CONTAINER \
+  docker run --name $SEQREPO_CONTAINER \
     -v seqrepo_data:/seqrepo \
-    hgvs-seqrepo_rsync
+    hgvs-seqrepo_rsync \
+    -it "/usr/bin/rsync -azvHP --no-motd dl.biocommons.org::seqrepo/2021-01-29/ /seqrepo/latest'"
 
   # Wait for the seqrepo_rsync container to complete its task (you may need to customize this)
   docker wait $SEQREPO_CONTAINER

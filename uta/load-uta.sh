@@ -36,7 +36,8 @@ UTA_PGD_URL=http://dl.biocommons.org/uta/${UTA_BASENAME}
 UTA_PGD_FN=/tmp/${UTA_BASENAME}
 
 if ! [ -e "${UTA_PGD_FN}" ]; then
-    curl -oL "${UTA_PGD_FN}.tmp" "$UTA_PGD_URL"
+    # curl -oL "${UTA_PGD_FN}.tmp" "$UTA_PGD_URL"
+    wget -O "${UTA_PGD_FN}.tmp" "$UTA_PGD_URL"
     mv "${UTA_PGD_FN}.tmp" "${UTA_PGD_FN}"
 fi
 

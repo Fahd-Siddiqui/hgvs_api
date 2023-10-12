@@ -1,7 +1,6 @@
 FROM postgres:11-bullseye
 
-RUN apt-get update && apt-get install -y \
-    curl
+RUN apt-get update && apt-get install -y wget curl
 
 ENV POSTGRES_PASSWORD=password-login-is-disabled
 
